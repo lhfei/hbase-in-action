@@ -174,5 +174,6 @@
   <modules>
     <module>client-api</module>
     <module>myhbase-common</module>
+    <module>zookeeper-api</module>
   </modules>
 </project>
