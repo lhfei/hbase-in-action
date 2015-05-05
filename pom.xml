@@ -107,7 +107,17 @@
 			<version>1.1.0</version>
 			<classifier>hadoop2</classifier>
 		</dependency>
-
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-annotations</artifactId>
+			<version>${hadoop.version}</version>
+		</dependency>
+		
 		<!-- Jackson JSON -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
