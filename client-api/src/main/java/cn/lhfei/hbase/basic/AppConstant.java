@@ -15,8 +15,6 @@
  */
 package cn.lhfei.hbase.basic;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
 
 /**
  * @version 0.1
@@ -25,19 +23,8 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
  *
  * @since  May 5, 2015
  */
-public abstract class AppConfig {
-	
-	protected static Configuration getConfiguration() {
-		Configuration conf = HBaseConfiguration.create();
-		
-		conf.set("hbase.master", "114.80.177.136：6000");
-		conf.set("hbase.zookeeper.quorum", "114.80.177.136");
-		conf.set("zookeeper.znode.parent", "/cloudland");	// Path must start with / character
-		
-		return conf;
-	}
-	
-	
+public class AppConstant {
+
 	/**
 	 * The name of test table.
 	 */
@@ -56,4 +43,6 @@ public abstract class AppConfig {
 	 * The test table's row name.
 	 */
 	public static final String TEST_TABLE_ROW_NAME = "row1";
+	
+	
 }

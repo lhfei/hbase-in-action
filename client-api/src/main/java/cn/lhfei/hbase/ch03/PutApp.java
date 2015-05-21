@@ -26,6 +26,7 @@ import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.basic.AppConfig;
+import cn.lhfei.hbase.basic.AppConstant;
 import cn.lhfei.hbase.common.HBaseHelper;
 
 /**
@@ -41,16 +42,16 @@ public class PutApp extends AppConfig {
 		Configuration conf = getConfiguration();//HBaseConfiguration.create(); // co PutExample-1-CreateConf Create the required configuration.
 		
 	    HBaseHelper helper = HBaseHelper.getHelper(conf);
-	    helper.dropTable("testtable");
-	    helper.createTable("testtable", "colfam1");
+	    helper.dropTable(AppConstant.TEST_TABLE_NAME);
+	    helper.createTable(AppConstant.TEST_TABLE_NAME, AppConstant.TEST_TABLE_COLUMN_FAMILY_NAME);
 	    Connection connection = ConnectionFactory.createConnection(conf);
-	    Table table = connection.getTable(TableName.valueOf("testtable")); // co PutExample-2-NewTable Instantiate a new client.
+	    Table table = connection.getTable(TableName.valueOf(AppConstant.TEST_TABLE_NAME)); // co PutExample-2-NewTable Instantiate a new client.
 
-	    Put put = new Put(Bytes.toBytes("row1")); // co PutExample-3-NewPut Create put with specific row.
+	    Put put = new Put(Bytes.toBytes(AppConstant.TEST_TABLE_ROW_NAME)); // co PutExample-3-NewPut Create put with specific row.
 
-	    put.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual1"),
+	    put.addColumn(AppConstant.TEST_TABLE_COLUMN_FAMILY_NAME.getBytes(), Bytes.toBytes("qual1"),
 	      Bytes.toBytes("val1")); // co PutExample-4-AddCol1 Add a column, whose name is "colfam1:qual1", to the put.
-	    put.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("qual2"),
+	    put.addColumn(AppConstant.TEST_TABLE_COLUMN_FAMILY_NAME.getBytes(), Bytes.toBytes("qual2"),
 	      Bytes.toBytes("val2")); // co PutExample-4-AddCol2 Add another column, whose name is "colfam1:qual2", to the put.
 
 	    table.put(put); // co PutExample-5-DoPut Store row with column into the HBase table.
