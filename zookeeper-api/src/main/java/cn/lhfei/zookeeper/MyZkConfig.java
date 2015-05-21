@@ -23,7 +23,7 @@ package cn.lhfei.zookeeper;
  */
 public final class MyZkConfig {
 
-	public static final String ZK_SERVER_MASTER = "127.0.1";
+	public static final String ZK_SERVER_MASTER = "114.80.177.136";
 	
 	public static final String ZK_NODE_GROUP_NAME = "zoo";
 	
