@@ -30,8 +30,8 @@ public abstract class AppConfig {
 	protected static Configuration getConfiguration() {
 		Configuration conf = HBaseConfiguration.create();
 		
-		conf.set("hbase.master", "114.80.177.136：6000");
-		conf.set("hbase.zookeeper.quorum", "114.80.177.136");
+		conf.set("hbase.master", "114.80.177.144：6000");
+		conf.set("hbase.zookeeper.quorum", "114.80.177.144");
 		conf.set("zookeeper.znode.parent", "/cloudland");	// Path must start with / character
 		
 		return conf;
