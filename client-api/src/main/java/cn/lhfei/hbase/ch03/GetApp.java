@@ -57,9 +57,7 @@ public class GetApp extends AppConfig {
 		get.addColumn(AppConstant.TEST_TABLE_COLUMN_FAMILY_NAME.getBytes(),
 				AppConstant.TEST_TABLE_COLUMN_QUALIFIER_NAME.getBytes());
 		
-		
 		Result result = table.get(get);
-		
 		
 		byte[] value = result.getValue(AppConstant.TEST_TABLE_COLUMN_FAMILY_NAME.getBytes(),
 				AppConstant.TEST_TABLE_COLUMN_QUALIFIER_NAME.getBytes()); 

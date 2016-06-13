@@ -30,10 +30,10 @@ public abstract class AppConfig {
 	protected static Configuration getConfiguration() {
 		Configuration conf = HBaseConfiguration.create();
 		
-		conf.set("hbase.master", "114.80.177.144：6000");
-		conf.set("hbase.zookeeper.quorum", "114.80.177.144");
-		conf.set("zookeeper.znode.parent", "/cloudland");	// Path must start with / character
-		
+		conf.set("hbase.master", "192.168.118.128：6000");
+		conf.set("hbase.zookeeper.quorum", "192.168.118.128");
+		//conf.set("zookeeper.znode.parent", "/cloudland");	// Path must start with / character
+		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
 		return conf;
 	}
 	

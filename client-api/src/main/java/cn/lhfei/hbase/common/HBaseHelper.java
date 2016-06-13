@@ -33,12 +33,14 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.client.Result;
+import org.apache.hadoop.hbase.client.ResultScanner;
+import org.apache.hadoop.hbase.client.Scan;
 import org.apache.hadoop.hbase.client.Table;
 import org.apache.hadoop.hbase.util.Bytes;
 
 /**
- * Used by the book examples to generate tables and fill them with test
- * data.</p>
+ * Used by the book examples to generate tables and fill them with test data.
+ * </p>
  * 
  * @version 0.1
  *
@@ -58,8 +60,7 @@ public class HBaseHelper implements Closeable {
 		this.admin = connection.getAdmin();
 	}
 
-	public static HBaseHelper getHelper(Configuration configuration)
-			throws IOException {
+	public static HBaseHelper getHelper(Configuration configuration) throws IOException {
 		return new HBaseHelper(configuration);
 	}
 
@@ -78,8 +79,7 @@ public class HBaseHelper implements Closeable {
 
 	public void createNamespace(String namespace) {
 		try {
-			NamespaceDescriptor nd = NamespaceDescriptor.create(namespace)
-					.build();
+			NamespaceDescriptor nd = NamespaceDescriptor.create(namespace).build();
 			admin.createNamespace(nd);
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
@@ -89,8 +89,7 @@ public class HBaseHelper implements Closeable {
 	public void dropNamespace(String namespace, boolean force) {
 		try {
 			if (force) {
-				TableName[] tableNames = admin
-						.listTableNamesByNamespace(namespace);
+				TableName[] tableNames = admin.listTableNamesByNamespace(namespace);
 				for (TableName name : tableNames) {
 					admin.disableTable(name);
 					admin.deleteTable(name);
@@ -118,28 +117,24 @@ public class HBaseHelper implements Closeable {
 		createTable(TableName.valueOf(table), 1, null, colfams);
 	}
 
-	public void createTable(TableName table, String... colfams)
-			throws IOException {
+	public void createTable(TableName table, String... colfams) throws IOException {
 		createTable(table, 1, null, colfams);
 	}
 
-	public void createTable(String table, int maxVersions, String... colfams)
-			throws IOException {
+	public void createTable(String table, int maxVersions, String... colfams) throws IOException {
 		createTable(TableName.valueOf(table), maxVersions, null, colfams);
 	}
 
-	public void createTable(TableName table, int maxVersions, String... colfams)
-			throws IOException {
+	public void createTable(TableName table, int maxVersions, String... colfams) throws IOException {
 		createTable(table, maxVersions, null, colfams);
 	}
 
-	public void createTable(String table, byte[][] splitKeys, String... colfams)
-			throws IOException {
+	public void createTable(String table, byte[][] splitKeys, String... colfams) throws IOException {
 		createTable(TableName.valueOf(table), 1, splitKeys, colfams);
 	}
 
-	public void createTable(TableName table, int maxVersions,
-			byte[][] splitKeys, String... colfams) throws IOException {
+	public void createTable(TableName table, int maxVersions, byte[][] splitKeys, String... colfams)
+			throws IOException {
 		HTableDescriptor desc = new HTableDescriptor(table);
 		for (String cf : colfams) {
 			HColumnDescriptor coldef = new HColumnDescriptor(cf);
@@ -173,52 +168,42 @@ public class HBaseHelper implements Closeable {
 		}
 	}
 
-	public void fillTable(String table, int startRow, int endRow, int numCols,
-			String... colfams) throws IOException {
+	public void fillTable(String table, int startRow, int endRow, int numCols, String... colfams) throws IOException {
 		fillTable(TableName.valueOf(table), startRow, endRow, numCols, colfams);
 	}
 
-	public void fillTable(TableName table, int startRow, int endRow,
-			int numCols, String... colfams) throws IOException {
+	public void fillTable(TableName table, int startRow, int endRow, int numCols, String... colfams)
+			throws IOException {
 		fillTable(table, startRow, endRow, numCols, -1, false, colfams);
 	}
 
-	public void fillTable(String table, int startRow, int endRow, int numCols,
-			boolean setTimestamp, String... colfams) throws IOException {
-		fillTable(TableName.valueOf(table), startRow, endRow, numCols, -1,
-				setTimestamp, colfams);
+	public void fillTable(String table, int startRow, int endRow, int numCols, boolean setTimestamp, String... colfams)
+			throws IOException {
+		fillTable(TableName.valueOf(table), startRow, endRow, numCols, -1, setTimestamp, colfams);
 	}
 
-	public void fillTable(TableName table, int startRow, int endRow,
-			int numCols, boolean setTimestamp, String... colfams)
-			throws IOException {
+	public void fillTable(TableName table, int startRow, int endRow, int numCols, boolean setTimestamp,
+			String... colfams) throws IOException {
 		fillTable(table, startRow, endRow, numCols, -1, setTimestamp, colfams);
 	}
 
-	public void fillTable(String table, int startRow, int endRow, int numCols,
-			int pad, boolean setTimestamp, String... colfams)
-			throws IOException {
-		fillTable(TableName.valueOf(table), startRow, endRow, numCols, pad,
-				setTimestamp, false, colfams);
-	}
-
-	public void fillTable(TableName table, int startRow, int endRow,
-			int numCols, int pad, boolean setTimestamp, String... colfams)
-			throws IOException {
-		fillTable(table, startRow, endRow, numCols, pad, setTimestamp, false,
-				colfams);
-	}
-
-	public void fillTable(String table, int startRow, int endRow, int numCols,
-			int pad, boolean setTimestamp, boolean random, String... colfams)
-			throws IOException {
-		fillTable(TableName.valueOf(table), startRow, endRow, numCols, pad,
-				setTimestamp, random, colfams);
-	}
-
-	public void fillTable(TableName table, int startRow, int endRow,
-			int numCols, int pad, boolean setTimestamp, boolean random,
+	public void fillTable(String table, int startRow, int endRow, int numCols, int pad, boolean setTimestamp,
 			String... colfams) throws IOException {
+		fillTable(TableName.valueOf(table), startRow, endRow, numCols, pad, setTimestamp, false, colfams);
+	}
+
+	public void fillTable(TableName table, int startRow, int endRow, int numCols, int pad, boolean setTimestamp,
+			String... colfams) throws IOException {
+		fillTable(table, startRow, endRow, numCols, pad, setTimestamp, false, colfams);
+	}
+
+	public void fillTable(String table, int startRow, int endRow, int numCols, int pad, boolean setTimestamp,
+			boolean random, String... colfams) throws IOException {
+		fillTable(TableName.valueOf(table), startRow, endRow, numCols, pad, setTimestamp, random, colfams);
+	}
+
+	public void fillTable(TableName table, int startRow, int endRow, int numCols, int pad, boolean setTimestamp,
+			boolean random, String... colfams) throws IOException {
 		Table tbl = connection.getTable(table);
 		Random rnd = new Random();
 		for (int row = startRow; row <= endRow; row++) {
@@ -226,15 +211,12 @@ public class HBaseHelper implements Closeable {
 				Put put = new Put(Bytes.toBytes("row-" + padNum(row, pad)));
 				for (String cf : colfams) {
 					String colName = "col-" + padNum(col, pad);
-					String val = "val-"
-							+ (random ? Integer.toString(rnd.nextInt(numCols))
-									: padNum(row, pad) + "." + padNum(col, pad));
+					String val = "val-" + (random ? Integer.toString(rnd.nextInt(numCols))
+							: padNum(row, pad) + "." + padNum(col, pad));
 					if (setTimestamp) {
-						put.addColumn(Bytes.toBytes(cf),
-								Bytes.toBytes(colName), col, Bytes.toBytes(val));
+						put.addColumn(Bytes.toBytes(cf), Bytes.toBytes(colName), col, Bytes.toBytes(val));
 					} else {
-						put.addColumn(Bytes.toBytes(cf),
-								Bytes.toBytes(colName), Bytes.toBytes(val));
+						put.addColumn(Bytes.toBytes(cf), Bytes.toBytes(colName), Bytes.toBytes(val));
 					}
 				}
 				tbl.put(put);
@@ -243,19 +225,14 @@ public class HBaseHelper implements Closeable {
 		tbl.close();
 	}
 
-	public void fillTableRandom(String table, int minRow, int maxRow,
-			int padRow, int minCol, int maxCol, int padCol, int minVal,
-			int maxVal, int padVal, boolean setTimestamp, String... colfams)
-			throws IOException {
-		fillTableRandom(TableName.valueOf(table), minRow, maxRow, padRow,
-				minCol, maxCol, padCol, minVal, maxVal, padVal, setTimestamp,
-				colfams);
+	public void fillTableRandom(String table, int minRow, int maxRow, int padRow, int minCol, int maxCol, int padCol,
+			int minVal, int maxVal, int padVal, boolean setTimestamp, String... colfams) throws IOException {
+		fillTableRandom(TableName.valueOf(table), minRow, maxRow, padRow, minCol, maxCol, padCol, minVal, maxVal,
+				padVal, setTimestamp, colfams);
 	}
 
-	public void fillTableRandom(TableName table, int minRow, int maxRow,
-			int padRow, int minCol, int maxCol, int padCol, int minVal,
-			int maxVal, int padVal, boolean setTimestamp, String... colfams)
-			throws IOException {
+	public void fillTableRandom(TableName table, int minRow, int maxRow, int padRow, int minCol, int maxCol, int padCol,
+			int minVal, int maxVal, int padVal, boolean setTimestamp, String... colfams) throws IOException {
 		Table tbl = connection.getTable(table);
 		Random rnd = new Random();
 		int maxRows = minRow + rnd.nextInt(maxRow - minRow);
@@ -263,19 +240,16 @@ public class HBaseHelper implements Closeable {
 			int maxCols = minCol + rnd.nextInt(maxCol - minCol);
 			for (int col = 0; col < maxCols; col++) {
 				int rowNum = rnd.nextInt(maxRow - minRow + 1);
-				Put put = new Put(
-						Bytes.toBytes("row-" + padNum(rowNum, padRow)));
+				Put put = new Put(Bytes.toBytes("row-" + padNum(rowNum, padRow)));
 				for (String cf : colfams) {
 					int colNum = rnd.nextInt(maxCol - minCol + 1);
 					String colName = "col-" + padNum(colNum, padCol);
 					int valNum = rnd.nextInt(maxVal - minVal + 1);
 					String val = "val-" + padNum(valNum, padCol);
 					if (setTimestamp) {
-						put.addColumn(Bytes.toBytes(cf),
-								Bytes.toBytes(colName), col, Bytes.toBytes(val));
+						put.addColumn(Bytes.toBytes(cf), Bytes.toBytes(colName), col, Bytes.toBytes(val));
 					} else {
-						put.addColumn(Bytes.toBytes(cf),
-								Bytes.toBytes(colName), Bytes.toBytes(val));
+						put.addColumn(Bytes.toBytes(cf), Bytes.toBytes(colName), Bytes.toBytes(val));
 					}
 				}
 				tbl.put(put);
@@ -294,43 +268,37 @@ public class HBaseHelper implements Closeable {
 		return res;
 	}
 
-	public void put(String table, String row, String fam, String qual,
-			String val) throws IOException {
+	public void put(String table, String row, String fam, String qual, String val) throws IOException {
 		put(TableName.valueOf(table), row, fam, qual, val);
 	}
 
-	public void put(TableName table, String row, String fam, String qual,
-			String val) throws IOException {
+	public void put(TableName table, String row, String fam, String qual, String val) throws IOException {
 		Table tbl = connection.getTable(table);
 		Put put = new Put(Bytes.toBytes(row));
-		put.addColumn(Bytes.toBytes(fam), Bytes.toBytes(qual),
-				Bytes.toBytes(val));
+		put.addColumn(Bytes.toBytes(fam), Bytes.toBytes(qual), Bytes.toBytes(val));
 		tbl.put(put);
 		tbl.close();
 	}
 
-	public void put(String table, String row, String fam, String qual, long ts,
-			String val) throws IOException {
+	public void put(String table, String row, String fam, String qual, long ts, String val) throws IOException {
 		put(TableName.valueOf(table), row, fam, qual, ts, val);
 	}
 
-	public void put(TableName table, String row, String fam, String qual,
-			long ts, String val) throws IOException {
+	public void put(TableName table, String row, String fam, String qual, long ts, String val) throws IOException {
 		Table tbl = connection.getTable(table);
 		Put put = new Put(Bytes.toBytes(row));
-		put.addColumn(Bytes.toBytes(fam), Bytes.toBytes(qual), ts,
-				Bytes.toBytes(val));
+		put.addColumn(Bytes.toBytes(fam), Bytes.toBytes(qual), ts, Bytes.toBytes(val));
 		tbl.put(put);
 		tbl.close();
 	}
 
-	public void put(String table, String[] rows, String[] fams, String[] quals,
-			long[] ts, String[] vals) throws IOException {
+	public void put(String table, String[] rows, String[] fams, String[] quals, long[] ts, String[] vals)
+			throws IOException {
 		put(TableName.valueOf(table), rows, fams, quals, ts, vals);
 	}
 
-	public void put(TableName table, String[] rows, String[] fams,
-			String[] quals, long[] ts, String[] vals) throws IOException {
+	public void put(TableName table, String[] rows, String[] fams, String[] quals, long[] ts, String[] vals)
+			throws IOException {
 		Table tbl = connection.getTable(table);
 		for (String row : rows) {
 			Put put = new Put(Bytes.toBytes(row));
@@ -339,10 +307,8 @@ public class HBaseHelper implements Closeable {
 				for (String qual : quals) {
 					String val = vals[v < vals.length ? v : vals.length - 1];
 					long t = ts[v < ts.length ? v : ts.length - 1];
-					System.out.println("Adding: " + row + " " + fam + " "
-							+ qual + " " + t + " " + val);
-					put.addColumn(Bytes.toBytes(fam), Bytes.toBytes(qual), t,
-							Bytes.toBytes(val));
+					System.out.println("Adding: " + row + " " + fam + " " + qual + " " + t + " " + val);
+					put.addColumn(Bytes.toBytes(fam), Bytes.toBytes(qual), t, Bytes.toBytes(val));
 					v++;
 				}
 			}
@@ -351,13 +317,11 @@ public class HBaseHelper implements Closeable {
 		tbl.close();
 	}
 
-	public void dump(String table, String[] rows, String[] fams, String[] quals)
-			throws IOException {
+	public void dump(String table, String[] rows, String[] fams, String[] quals) throws IOException {
 		dump(TableName.valueOf(table), rows, fams, quals);
 	}
 
-	public void dump(TableName table, String[] rows, String[] fams,
-			String[] quals) throws IOException {
+	public void dump(TableName table, String[] rows, String[] fams, String[] quals) throws IOException {
 		Table tbl = connection.getTable(table);
 		List<Get> gets = new ArrayList<Get>();
 		for (String row : rows) {
@@ -375,14 +339,29 @@ public class HBaseHelper implements Closeable {
 		Result[] results = tbl.get(gets);
 		for (Result result : results) {
 			for (Cell cell : result.rawCells()) {
-				System.out.println("Cell: "
-						+ cell
-						+ ", Value: "
-						+ Bytes.toString(cell.getValueArray(),
-								cell.getValueOffset(), cell.getValueLength()));
+				System.out.println("Cell: " + cell + ", Value: "
+						+ Bytes.toString(cell.getValueArray(), cell.getValueOffset(), cell.getValueLength()));
 			}
 		}
 		tbl.close();
 	}
 
+	public void dump(String table) throws IOException {
+		dump(TableName.valueOf(table));
+	}
+
+	public void dump(TableName table) throws IOException {
+		try (Table t = connection.getTable(table); ResultScanner scanner = t.getScanner(new Scan())) {
+			for (Result result : scanner) {
+				dumpResult(result);
+			}
+		}
+	}
+
+	public void dumpResult(Result result) {
+		for (Cell cell : result.rawCells()) {
+			System.out.println("Cell: " + cell + ", Value: "
+					+ Bytes.toString(cell.getValueArray(), cell.getValueOffset(), cell.getValueLength()));
+		}
+	}
 }
