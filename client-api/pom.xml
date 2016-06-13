@@ -40,11 +40,6 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>cn.lhfei.hbase.common</groupId>
-			<artifactId>myhbase-common</artifactId>
-			<version>${parent.version}</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>
