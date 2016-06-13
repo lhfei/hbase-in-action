@@ -51,10 +51,10 @@ public class FamilyFilterApp extends AppConfig {
 		HBaseHelper helper = HBaseHelper.getHelper(configuration);
 		Connection connection = helper.getConnection();
 		
-		helper.dropTable(TEST_TABLE_NAME);
+		/*helper.dropTable(TEST_TABLE_NAME);
 	    helper.createTable(TEST_TABLE_NAME, "colfam1", "colfam2", "colfam3", "colfam4");
 	    log.info("Adding rows to table...");
-	    helper.fillTable("testtable", 1, 10, 2, "colfam1", "colfam2", "colfam3", "colfam4");
+	    helper.fillTable(TEST_TABLE_NAME, 1, 10, 2, "colfam1", "colfam2", "colfam3", "colfam4");*/
 		
 	    Table table = connection.getTable(TableName.valueOf(TEST_TABLE_NAME));
 		

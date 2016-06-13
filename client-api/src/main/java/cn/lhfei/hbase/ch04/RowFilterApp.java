@@ -55,9 +55,9 @@ public class RowFilterApp extends AppConfig {
 		Connection connection = helper.getConnection();
 		Table table = connection.getTable(TableName.valueOf(TEST_TABLE_NAME));
 		
-		helper.dropTable(TEST_TABLE_NAME);
+		/*helper.dropTable(TEST_TABLE_NAME);
 		helper.createTable(TEST_TABLE_NAME, "colfam1", "colfam2");
-		helper.fillTable(TEST_TABLE_NAME, 1, 100, 100, "colfam1", "colfam2");
+		helper.fillTable(TEST_TABLE_NAME, 1, 100, 100, "colfam1", "colfam2");*/
 		
 		Scan scan = new Scan();
 		scan.addColumn(Bytes.toBytes("colfam1"), Bytes.toBytes("col-1"));

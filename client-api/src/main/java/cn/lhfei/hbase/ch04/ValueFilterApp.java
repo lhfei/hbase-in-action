@@ -53,13 +53,7 @@ public class ValueFilterApp extends AppConfig {
 		HBaseHelper helper = HBaseHelper.getHelper(configuration);
 		Connection connection = helper.getConnection();
 		
-		helper.dropTable(TEST_TABLE_NAME);
-	    helper.createTable(TEST_TABLE_NAME, "colfam1", "colfam2");
-	    log.info("Adding rows to table...");
-	    helper.fillTable("testtable", 1, 10, 10, "colfam1", "colfam2");
-		
 	    Table table = connection.getTable(TableName.valueOf(TEST_TABLE_NAME));
-		
 	    Filter filter = new QualifierFilter(CompareOp.LESS_OR_EQUAL, new SubstringComparator(".4"));
 	    
 	    Scan scan = new Scan();
@@ -69,11 +63,8 @@ public class ValueFilterApp extends AppConfig {
 	    log.info("Scanning table... ");
 		for (Result result : scanner) {
 			for (Cell cell : result.rawCells()) {
-				log.info(
-						"Cell: {} , Value: {}",
-						cell,
-						Bytes.toString(cell.getValueArray(),
-								cell.getValueOffset(), cell.getValueLength()));
+				log.info("Cell: {} , Value: {}", cell,
+						Bytes.toString(cell.getValueArray(), cell.getValueOffset(), cell.getValueLength()));
 			}
 		}
 	    scanner.close();
@@ -81,13 +72,10 @@ public class ValueFilterApp extends AppConfig {
 	    Get get = new Get(Bytes.toBytes("row-5"));
 	    get.setFilter(filter);
 	    Result result = table.get(get);
-	    for (Cell cell : result.rawCells()) {
-	    	log.info(
-	    			"Cell: {} , Value: {}",
-	    			cell,
-	    			Bytes.toString(cell.getValueArray(),
-	    					cell.getValueOffset(), cell.getValueLength()));
-	    }
+		for (Cell cell : result.rawCells()) {
+			log.info("Cell: {} , Value: {}", cell,
+					Bytes.toString(cell.getValueArray(), cell.getValueOffset(), cell.getValueLength()));
+		}
 
 	}
 

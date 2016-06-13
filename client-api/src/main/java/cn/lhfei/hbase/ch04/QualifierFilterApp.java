@@ -52,10 +52,10 @@ public class QualifierFilterApp extends AppConfig {
 		HBaseHelper helper = HBaseHelper.getHelper(configuration);
 		Connection connection = helper.getConnection();
 		
-		helper.dropTable(TEST_TABLE_NAME);
+		/*helper.dropTable(TEST_TABLE_NAME);
 	    helper.createTable(TEST_TABLE_NAME, "colfam1", "colfam2");
 	    log.info("Adding rows to table...");
-	    helper.fillTable("testtable", 1, 10, 10, "colfam1", "colfam2");
+	    helper.fillTable("testtable", 1, 10, 10, "colfam1", "colfam2");*/
 		
 	    Table table = connection.getTable(TableName.valueOf(TEST_TABLE_NAME));
 		
