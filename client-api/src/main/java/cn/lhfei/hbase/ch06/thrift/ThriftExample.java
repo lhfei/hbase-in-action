@@ -20,7 +20,15 @@ import cn.lhfei.hbase.ch06.thrift.generated.TRowResult;
 import cn.lhfei.hbase.ch06.thrift.generated.TScan;
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc ThriftExample Example using the Thrift generated client API
+/**
+ * ThriftExample Example using the Thrift generated client API
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ThriftExample {
 
   // vv ThriftExample

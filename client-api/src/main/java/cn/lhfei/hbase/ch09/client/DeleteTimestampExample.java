@@ -15,7 +15,16 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc DeleteTimestampExample Example application deleting with explicit timestamps
+/**
+ * DeleteTimestampExample Example application deleting with explicit
+ * timestamps
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class DeleteTimestampExample {
 
   private final static byte[] ROW1 = Bytes.toBytes("row1");

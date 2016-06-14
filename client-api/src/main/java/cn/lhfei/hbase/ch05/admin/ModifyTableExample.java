@@ -15,7 +15,16 @@ import org.apache.hadoop.hbase.util.Pair;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc ModifyTableExample Example modifying the structure of an existing table
+/**
+ * ModifyTableExample Example modifying the structure of an existing table
+ *
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ModifyTableExample {
 
   public static void main(String[] args) throws IOException, InterruptedException {

@@ -17,7 +17,15 @@ import org.apache.hadoop.hbase.io.hfile.CacheConfig;
 import org.apache.hadoop.hbase.regionserver.HRegion;
 import org.apache.hadoop.hbase.regionserver.StoreFile;
 
-// cc DelayRegionCloseObserver Special test observer creating delays
+/**
+ * DelayRegionCloseObserver Special test observer creating delays
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class DelayRegionCloseObserver extends BaseRegionObserver {
   public static final Log LOG = LogFactory.getLog(HRegion.class);
 

@@ -14,7 +14,15 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc CreateTableExample Example using the administrative API to create a table
+/**
+ * CreateTableExample Example using the administrative API to create a table.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since  Jun 13, 2016
+ */
 public class CreateTableExample {
 
 	public static void main(String[] args) throws IOException, InterruptedException {

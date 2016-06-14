@@ -17,7 +17,16 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc ScanConsistencyExample1 Checks the scans behavior during concurrent modifications
+/**
+ * ScanConsistencyExample1 Checks the scans behavior during concurrent
+ * modifications
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ScanConsistencyExample1 {
 
   public static void main(String[] args) throws IOException {

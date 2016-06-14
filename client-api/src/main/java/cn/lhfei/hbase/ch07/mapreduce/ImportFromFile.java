@@ -31,29 +31,32 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-// cc ImportFromFile MapReduce job that reads from a file and writes into a table.
-// vv ImportFromFile
+/**
+ * 
+ * ImportFromFile MapReduce job that reads from a file and writes into a
+ * table.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ImportFromFile {
-  // ^^ ImportFromFile
   private static final Log LOG = LogFactory.getLog(ImportFromFile.class);
 
-  // vv ImportFromFile
   public static final String NAME = "ImportFromFile"; // co ImportFromFile-1-Name Define a job name for later use.
   public enum Counters { LINES }
-
-  // ^^ ImportFromFile
   /**
    * Implements the <code>Mapper</code> that takes the lines from the input
    * and outputs <code>Put</code> instances.
    */
-  // vv ImportFromFile
   static class ImportMapper
   extends Mapper<LongWritable, Text, ImmutableBytesWritable, Mutation> { // co ImportFromFile-2-Mapper Define the mapper class, extending the provided Hadoop class.
 
     private byte[] family = null;
     private byte[] qualifier = null;
 
-    // ^^ ImportFromFile
     /**
      * Prepares the column family and qualifier.
      *
@@ -61,7 +64,6 @@ public class ImportFromFile {
      * @throws IOException When an operation fails - not possible here.
      * @throws InterruptedException When the task is aborted.
      */
-    // vv ImportFromFile
     @Override
     protected void setup(Context context)
       throws IOException, InterruptedException {
@@ -73,7 +75,6 @@ public class ImportFromFile {
       }
     }
 
-    // ^^ ImportFromFile
     /**
      * Maps the input.
      *
@@ -82,7 +83,6 @@ public class ImportFromFile {
      * @param context The task context.
      * @throws IOException When mapping the input fails.
      */
-    // vv ImportFromFile
     @Override
     public void map(LongWritable offset, Text line, Context context) // co ImportFromFile-3-Map The map() function transforms the key/value provided by the InputFormat to what is needed by the OutputFormat.
     throws IOException {
@@ -99,7 +99,6 @@ public class ImportFromFile {
     }
   }
 
-  // ^^ ImportFromFile
   /**
    * Parse the command line parameters.
    *
@@ -107,7 +106,6 @@ public class ImportFromFile {
    * @return The parsed command line.
    * @throws ParseException When the parsing of the parameters fails.
    */
-  // vv ImportFromFile
   private static CommandLine parseArgs(String[] args) throws ParseException { // co ImportFromFile-6-ParseArgs Parse the command line parameters using the Apache Commons CLI classes. These are already part of HBase and therefore are handy to process the job specific parameters.
     Options options = new Options();
     Option o = new Option("t", "table", true,
@@ -136,33 +134,27 @@ public class ImportFromFile {
       formatter.printHelp(NAME + " ", options, true);
       System.exit(-1);
     }
-    // ^^ ImportFromFile
     if (cmd.hasOption("d")) {
       Logger log = Logger.getLogger("mapreduce");
       log.setLevel(Level.DEBUG);
     }
-    // vv ImportFromFile
     return cmd;
   }
 
-  // ^^ ImportFromFile
   /**
    * Main entry point.
    *
    * @param args The command line parameters.
    * @throws Exception When running the job fails.
    */
-  // vv ImportFromFile
   public static void main(String[] args) throws Exception {
     Configuration conf = HBaseConfiguration.create();
     String[] otherArgs =
       new GenericOptionsParser(conf, args).getRemainingArgs(); // co ImportFromFile-7-Args Give the command line arguments to the generic parser first to handle "-Dxyz" properties.
     CommandLine cmd = parseArgs(otherArgs);
-    // ^^ ImportFromFile
     // check debug flag and other options
     if (cmd.hasOption("d")) conf.set("conf.debug", "true");
     // get details
-    // vv ImportFromFile
     String table = cmd.getOptionValue("t");
     String input = cmd.getOptionValue("i");
     String column = cmd.getOptionValue("c");
@@ -182,4 +174,3 @@ public class ImportFromFile {
     System.exit(job.waitForCompletion(true) ? 0 : 1);
   }
 }
-// ^^ ImportFromFile

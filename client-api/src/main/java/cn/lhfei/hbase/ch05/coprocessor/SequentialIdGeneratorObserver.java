@@ -17,7 +17,16 @@ import org.apache.hadoop.hbase.regionserver.HRegion;
 import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
 import org.apache.hadoop.hbase.util.Bytes;
 
-// cc SequentialIdGeneratorObserver Adds a coprocessor local ID into the operation
+/**
+ * SequentialIdGeneratorObserver Adds a coprocessor local ID into the
+ * operation
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class SequentialIdGeneratorObserver extends BaseRegionObserver {
   public static final Log LOG = LogFactory.getLog(HRegion.class);
 

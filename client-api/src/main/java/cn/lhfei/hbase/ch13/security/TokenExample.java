@@ -14,7 +14,15 @@ import org.apache.hadoop.hbase.security.token.TokenUtil;
 import org.apache.hadoop.security.UserGroupInformation;
 import org.apache.hadoop.security.token.Token;
 
-// cc TokenExample Shows the use of the HBase delegation token
+/**
+ * TokenExample Shows the use of the HBase delegation token
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class TokenExample {
 
   public static void main(String[] args) throws IOException, InterruptedException {

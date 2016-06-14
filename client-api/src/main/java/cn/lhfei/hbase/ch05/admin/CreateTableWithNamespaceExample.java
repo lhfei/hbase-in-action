@@ -15,7 +15,17 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc CreateTableWithNamespaceExample Example using the administrative API to create a table with a custom namespace
+/**
+ *
+ * CreateTableWithNamespaceExample Example using the administrative API to
+ * create a table with a custom namespace
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class CreateTableWithNamespaceExample {
 
   public static void main(String[] args) throws IOException, InterruptedException {

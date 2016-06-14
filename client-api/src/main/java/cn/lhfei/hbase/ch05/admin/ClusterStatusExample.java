@@ -15,9 +15,17 @@ import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 import org.apache.hadoop.hbase.util.Bytes;
 
-import cn.lhfei.hbase.ch06.*;
 
-// cc ClusterStatusExample Example reporting the status of a cluster
+/**
+ * 
+ * ClusterStatusExample Example reporting the status of a cluster.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since  Jun 13, 2016
+ */
 public class ClusterStatusExample {
 
   public static void main(String[] args) throws IOException, InterruptedException {

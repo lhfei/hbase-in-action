@@ -32,7 +32,17 @@ import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-// cc ImportFromFile2 MapReduce job that reads from a file and writes into a table.
+/**
+ * 
+ * ImportFromFile2 MapReduce job that reads from a file and writes into a
+ * table.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ImportFromFile2 {
   private static final Log LOG = LogFactory.getLog(ImportFromFile2.class);
 

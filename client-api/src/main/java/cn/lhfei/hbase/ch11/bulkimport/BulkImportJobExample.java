@@ -47,6 +47,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class BulkImportJobExample {
 
   private static Log LOG = LogFactory.getLog(BulkImportJobExample.class);

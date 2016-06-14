@@ -17,7 +17,16 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc ServerAndRegionNameExample Shows the use of server and region names
+/**
+ *
+ * ServerAndRegionNameExample Shows the use of server and region names
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ServerAndRegionNameExample {
 
   public static void main(String[] args) throws IOException, InterruptedException {

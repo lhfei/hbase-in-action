@@ -4,7 +4,16 @@ import java.io.IOException;
 
 import org.apache.hadoop.hbase.TableName;
 
-// cc TableNameExample Example how to create a TableName in code
+/**
+ *
+ * TableNameExample Example how to create a TableName in code
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class TableNameExample {
 
   // vv TableNameExample

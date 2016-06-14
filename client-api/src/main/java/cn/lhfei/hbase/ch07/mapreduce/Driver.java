@@ -4,6 +4,12 @@ import org.apache.hadoop.util.ProgramDriver;
 
 /**
  * Offers choices for included MapReduce jobs.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
  */
 public class Driver {
 

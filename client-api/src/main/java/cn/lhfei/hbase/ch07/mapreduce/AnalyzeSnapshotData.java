@@ -37,7 +37,17 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.IOException;
 
-// cc AnalyzeSnapshotData MapReduce job that reads the data from a snapshot and analyzes it.
+/**
+ * 
+ * AnalyzeSnapshotData MapReduce job that reads the data from a snapshot
+ * and analyzes it.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class AnalyzeSnapshotData {
 
   private static final Log LOG = LogFactory.getLog(AnalyzeSnapshotData.class);

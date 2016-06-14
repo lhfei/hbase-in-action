@@ -31,7 +31,16 @@ import com.google.protobuf.ServiceException;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc MultiRowMutationExample Use the coprocessor based multi-row mutation call
+/**
+ * MultiRowMutationExample Use the coprocessor based multi-row mutation
+ * call
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class MultiRowMutationExample {
 
   public static void main(String[] args) throws IOException,

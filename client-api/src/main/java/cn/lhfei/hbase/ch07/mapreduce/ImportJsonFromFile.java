@@ -32,8 +32,17 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-// cc ImportJsonFromFile Example job that reads from a file and writes into a table.
-// vv ImportJsonFromFile
+/**
+ * 
+ * ImportJsonFromFile Example job that reads from a file and writes into a
+ * table.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ImportJsonFromFile {
   private static final Log LOG = LogFactory.getLog(ImportJsonFromFile.class);
 

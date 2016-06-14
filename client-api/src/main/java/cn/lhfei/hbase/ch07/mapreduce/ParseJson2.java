@@ -31,7 +31,17 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-// cc ParseJson2 MapReduce job that parses the raw data into separate columns (map phase only).
+/**
+ * 
+ * ParseJson2 MapReduce job that parses the raw data into separate columns
+ * (map phase only).
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ParseJson2 {
 
   private static final Log LOG = LogFactory.getLog(ParseJson2.class);

@@ -17,7 +17,16 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc SnapshotExample Example showing the use of the admin snapshot API
+/**
+ *
+ * SnapshotExample Example showing the use of the admin snapshot API
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class SnapshotExample {
 
   public static void main(String[] args)

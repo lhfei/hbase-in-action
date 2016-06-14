@@ -33,7 +33,16 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-// cc AnalyzeData MapReduce job that reads the imported data and analyzes it.
+/**
+ * 
+ * AnalyzeData MapReduce job that reads the imported data and analyzes it.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class AnalyzeData {
 
   private static final Log LOG = LogFactory.getLog(AnalyzeData.class);

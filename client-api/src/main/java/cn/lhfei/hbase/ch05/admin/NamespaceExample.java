@@ -10,7 +10,16 @@ import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 
-// cc NamespaceExample Example using the administrative API to create etc. a namespace
+/**
+ * NamespaceExample Example using the administrative API to create etc.
+ *
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class NamespaceExample {
 
   public static void main(String[] args) throws IOException, InterruptedException {

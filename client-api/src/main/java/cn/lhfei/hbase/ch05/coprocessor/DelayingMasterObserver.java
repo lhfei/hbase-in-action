@@ -13,8 +13,16 @@ import org.apache.hadoop.hbase.coprocessor.MasterCoprocessorEnvironment;
 import org.apache.hadoop.hbase.master.AssignmentListener;
 import org.apache.hadoop.hbase.regionserver.HRegion;
 
-// cc DelayingMasterObserver Special master observer that delays region asignments
-// vv DelayingMasterObserver
+/**
+ * DelayingMasterObserver Special master observer that delays region
+ * asignments
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class DelayingMasterObserver extends BaseMasterObserver
   implements AssignmentListener {
   public static final Log LOG = LogFactory.getLog(HRegion.class);

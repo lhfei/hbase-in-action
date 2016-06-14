@@ -3,6 +3,13 @@
 
 package cn.lhfei.hbase.ch08.coprocessor.generated;
 
+/**
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public final class ScanControlProtos {
   private ScanControlProtos() {}
   public static void registerAllExtensions(

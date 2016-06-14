@@ -16,7 +16,17 @@ import org.apache.hadoop.hbase.util.Pair;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc CreateTableWithRegionsExample Example using the administrative API to create a table with predefined regions
+/**
+ *
+ * CreateTableWithRegionsExample Example using the administrative API to
+ * create a table with predefined regions
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class CreateTableWithRegionsExample {
 
   // vv CreateTableWithRegionsExample

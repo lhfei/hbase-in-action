@@ -32,6 +32,13 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.IOException;
 
+/**
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ParseJson {
 
   private static final Log LOG = LogFactory.getLog(ParseJson.class);

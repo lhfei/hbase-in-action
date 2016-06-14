@@ -12,7 +12,16 @@ import org.apache.hadoop.hbase.client.ConnectionFactory;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc ListTablesExample2 Example listing the existing tables with patterns
+/**
+ * ListTablesExample2 Example listing the existing tables with patterns
+ *
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ListTablesExample2 {
 
   private static void print(HTableDescriptor[] descriptors) {

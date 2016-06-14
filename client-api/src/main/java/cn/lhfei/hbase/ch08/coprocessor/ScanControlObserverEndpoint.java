@@ -56,9 +56,16 @@ import org.apache.hadoop.hbase.regionserver.wal.WALEdit;
 import org.apache.hadoop.hbase.util.Pair;
 import org.apache.hadoop.hbase.wal.WALKey;
 
-// cc ScanControlObserverEndpoint Observer and endpoint for scan operations
-// vv ScanControlObserverEndpoint
 @SuppressWarnings("deprecation") // because of API usage
+/**
+ * ScanControlObserverEndpoint Observer and endpoint for scan operations
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since Jun 13, 2016
+ */
 public class ScanControlObserverEndpoint
   extends ScanControlProtos.ScanControlService
   implements Coprocessor, CoprocessorService, RegionObserver {

@@ -21,7 +21,15 @@ import org.apache.hadoop.hbase.util.Bytes;
 
 import cn.lhfei.hbase.common.HBaseHelper;
 
-// cc ClusterOperationExample Shows the use of the cluster operations
+/**
+ * ClusterOperationExample Shows the use of the cluster operations.
+ * 
+ * @version 0.1
+ *
+ * @author Hefei Li
+ *
+ * @since  Jun 13, 2016
+ */
 public class ClusterOperationExample {
 
 	private static void printRegionInfo(List<HRegionInfo> infos) {
