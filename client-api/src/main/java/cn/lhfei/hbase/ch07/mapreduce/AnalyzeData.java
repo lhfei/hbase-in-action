@@ -54,13 +54,11 @@ public class AnalyzeData {
    * Implements the <code>Mapper</code> that reads the data and extracts the
    * required information.
    */
-  // vv AnalyzeData
   static class AnalyzeMapper extends TableMapper<Text, IntWritable> { // co AnalyzeData-1-Mapper Extend the supplied TableMapper class, setting your own output key and value types.
 
     private JSONParser parser = new JSONParser();
     private IntWritable ONE = new IntWritable(1);
 
-    // ^^ AnalyzeData
     /**
      * Maps the input.
      *
@@ -69,7 +67,6 @@ public class AnalyzeData {
      * @param context The task context.
      * @throws java.io.IOException When mapping the input fails.
      */
-    // vv AnalyzeData
     @Override
     public void map(ImmutableBytesWritable row, Result columns, Context context)
     throws IOException {
@@ -96,7 +93,6 @@ public class AnalyzeData {
         context.getCounter(Counters.ERROR).increment(1);
       }
     }
-    // ^^ AnalyzeData
     /*
        {
          "updated": "Mon, 14 Sep 2009 17:09:02 +0000",
@@ -125,42 +121,42 @@ public class AnalyzeData {
              e104984ea5f37cf8ae70451a619c9ac0#outernationalist"
        }
     */
-    // vv AnalyzeData
   }
 
-  // ^^ AnalyzeData
   /**
+   * AnalyzeData-3-Reducer Extend a Hadoop Reducer class, assigning the proper types.
+   * 
    * Implements the <code>Reducer</code> part of the process.
    */
-  // vv AnalyzeData
-  static class AnalyzeReducer
-  extends Reducer<Text, IntWritable, Text, IntWritable> { // co AnalyzeData-3-Reducer Extend a Hadoop Reducer class, assigning the proper types.
+	static class AnalyzeReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+		/**
+		 * 
+		 * Aggregates the counts.
+		 *
+		 * @param key
+		 *            The author.
+		 * @param values
+		 *            The counts for the author.
+		 * @param context
+		 *            The current task context.
+		 * @throws IOException
+		 *             When reading or writing the data fails.
+		 * @throws InterruptedException
+		 *             When the task is aborted.
+		 */
+		@Override
+		protected void reduce(Text key, Iterable<IntWritable> values, Context context)
+				throws IOException, InterruptedException {
+			int count = 0;
+			for (IntWritable one : values)
+				count++; // co AnalyzeData-4-Count Count the occurrences and
+							// emit sum.
+			if (context.getConfiguration().get("conf.debug") != null)
+				System.out.println("Author: " + key.toString() + ", Count: " + count);
+			context.write(key, new IntWritable(count));
+		}
+	}
 
-    // ^^ AnalyzeData
-    /**
-     * Aggregates the counts.
-     *
-     * @param key The author.
-     * @param values The counts for the author.
-     * @param context The current task context.
-     * @throws IOException When reading or writing the data fails.
-     * @throws InterruptedException When the task is aborted.
-     */
-    // vv AnalyzeData
-    @Override
-    protected void reduce(Text key, Iterable<IntWritable> values,
-      Context context) throws IOException, InterruptedException {
-      int count = 0;
-      for (IntWritable one : values) count++; // co AnalyzeData-4-Count Count the occurrences and emit sum.
-      // ^^ AnalyzeData
-      if (context.getConfiguration().get("conf.debug") != null)
-        System.out.println("Author: " + key.toString() + ", Count: " + count);
-      // vv AnalyzeData
-      context.write(key, new IntWritable(count));
-    }
-  }
-
-  // ^^ AnalyzeData
   /**
    * Parse the command line parameters.
    *
@@ -168,40 +164,37 @@ public class AnalyzeData {
    * @return The parsed command line.
    * @throws org.apache.commons.cli.ParseException When the parsing of the parameters fails.
    */
-  private static CommandLine parseArgs(String[] args) throws ParseException {
-    Options options = new Options();
-    Option o = new Option("t", "table", true,
-      "table to read from (must exist)");
-    o.setArgName("table-name");
-    o.setRequired(true);
-    options.addOption(o);
-    o = new Option("c", "column", true,
-      "column to read data from (must exist)");
-    o.setArgName("family:qualifier");
-    options.addOption(o);
-    o = new Option("o", "output", true,
-      "the directory to write to");
-    o.setArgName("path-in-HDFS");
-    o.setRequired(true);
-    options.addOption(o);
-    options.addOption("d", "debug", false, "switch on DEBUG log level");
-    CommandLineParser parser = new PosixParser();
-    CommandLine cmd = null;
-    try {
-      cmd = parser.parse(options, args);
-    } catch (Exception e) {
-      System.err.println("ERROR: " + e.getMessage() + "\n");
-      HelpFormatter formatter = new HelpFormatter();
-      formatter.printHelp(NAME + " ", options, true);
-      System.exit(-1);
-    }
-    if (cmd.hasOption("d")) {
-      Logger log = Logger.getLogger("mapreduce");
-      log.setLevel(Level.DEBUG);
-      System.out.println("DEBUG ON");
-    }
-    return cmd;
-  }
+	private static CommandLine parseArgs(String[] args) throws ParseException {
+		Options options = new Options();
+		Option o = new Option("t", "table", true, "table to read from (must exist)");
+		o.setArgName("table-name");
+		o.setRequired(true);
+		options.addOption(o);
+		o = new Option("c", "column", true, "column to read data from (must exist)");
+		o.setArgName("family:qualifier");
+		options.addOption(o);
+		o = new Option("o", "output", true, "the directory to write to");
+		o.setArgName("path-in-HDFS");
+		o.setRequired(true);
+		options.addOption(o);
+		options.addOption("d", "debug", false, "switch on DEBUG log level");
+		CommandLineParser parser = new PosixParser();
+		CommandLine cmd = null;
+		try {
+			cmd = parser.parse(options, args);
+		} catch (Exception e) {
+			System.err.println("ERROR: " + e.getMessage() + "\n");
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp(NAME + " ", options, true);
+			System.exit(-1);
+		}
+		if (cmd.hasOption("d")) {
+			Logger log = Logger.getLogger("mapreduce");
+			log.setLevel(Level.DEBUG);
+			System.out.println("DEBUG ON");
+		}
+		return cmd;
+	}
 
   /**
    * Main entry point.
@@ -209,43 +202,37 @@ public class AnalyzeData {
    * @param args  The command line parameters.
    * @throws Exception When running the job fails.
    */
-  // vv AnalyzeData
-  public static void main(String[] args) throws Exception {
-    /*...*/
-    // ^^ AnalyzeData
-    Configuration conf = HBaseConfiguration.create();
-    String[] otherArgs =
-      new GenericOptionsParser(conf, args).getRemainingArgs();
-    CommandLine cmd = parseArgs(otherArgs);
-    // check debug flag and other options
-    if (cmd.hasOption("d")) conf.set("conf.debug", "true");
-    // get details
-    String table = cmd.getOptionValue("t");
-    String column = cmd.getOptionValue("c");
-    String output = cmd.getOptionValue("o");
+	public static void main(String[] args) throws Exception {
+		Configuration conf = HBaseConfiguration.create();
+		String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
+		CommandLine cmd = parseArgs(otherArgs);
+		// check debug flag and other options
+		if (cmd.hasOption("d"))
+			conf.set("conf.debug", "true");
+		// get details
+		String table = cmd.getOptionValue("t");
+		String column = cmd.getOptionValue("c");
+		String output = cmd.getOptionValue("o");
 
-    // vv AnalyzeData
-    Scan scan = new Scan(); // co AnalyzeData-5-Scan Create and configure a Scan instance.
-    if (column != null) {
-      byte[][] colkey = KeyValue.parseColumn(Bytes.toBytes(column));
-      if (colkey.length > 1) {
-        scan.addColumn(colkey[0], colkey[1]);
-      } else {
-        scan.addFamily(colkey[0]);
-      }
-    }
+		Scan scan = new Scan(); 
+		if (column != null) {
+			byte[][] colkey = KeyValue.parseColumn(Bytes.toBytes(column));
+			if (colkey.length > 1) {
+				scan.addColumn(colkey[0], colkey[1]);
+			} else {
+				scan.addFamily(colkey[0]);
+			}
+		}
 
-    Job job = Job.getInstance(conf, "Analyze data in " + table);
-    job.setJarByClass(AnalyzeData.class);
-    TableMapReduceUtil.initTableMapperJob(table, scan, AnalyzeMapper.class,
-      Text.class, IntWritable.class, job); // co AnalyzeData-6-Util Set up the table mapper phase using the supplied utility.
-    job.setReducerClass(AnalyzeReducer.class);
-    job.setOutputKeyClass(Text.class); // co AnalyzeData-7-Output Configure the reduce phase using the normal Hadoop syntax.
-    job.setOutputValueClass(IntWritable.class);
-    job.setNumReduceTasks(1);
-    FileOutputFormat.setOutputPath(job, new Path(output));
+		Job job = Job.getInstance(conf, "Analyze data in " + table);
+		job.setJarByClass(AnalyzeData.class);
+		TableMapReduceUtil.initTableMapperJob(table, scan, AnalyzeMapper.class, Text.class, IntWritable.class, job); 
+		job.setReducerClass(AnalyzeReducer.class);
+		job.setOutputKeyClass(Text.class); 
+		job.setOutputValueClass(IntWritable.class);
+		job.setNumReduceTasks(1);
+		FileOutputFormat.setOutputPath(job, new Path(output));
 
-    System.exit(job.waitForCompletion(true) ? 0 : 1);
-  }
-  // ^^ AnalyzeData
+		System.exit(job.waitForCompletion(true) ? 0 : 1);
+	}
 }

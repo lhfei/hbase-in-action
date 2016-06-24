@@ -27,7 +27,7 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
  */
 public abstract class AppConfig {
 	
-	protected static Configuration getConfiguration() {
+	public static Configuration getConfiguration() {
 		Configuration conf = HBaseConfiguration.create();
 		
 		conf.set("hbase.master", "192.168.118.128：6000");
