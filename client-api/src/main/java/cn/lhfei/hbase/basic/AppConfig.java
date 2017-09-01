@@ -17,6 +17,8 @@ package cn.lhfei.hbase.basic;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @version 0.1
@@ -26,6 +28,7 @@ import org.apache.hadoop.hbase.HBaseConfiguration;
  * @since  May 5, 2015
  */
 public abstract class AppConfig {
+	protected Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	public static Configuration getConfiguration() {
 		Configuration conf = HBaseConfiguration.create();

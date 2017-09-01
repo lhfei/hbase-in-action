@@ -27,16 +27,15 @@
   </property>
   <property>
     <name>hbase.rootdir</name>
-    <!-- <value>file:///home/cloudland/hbase_data</value> -->
-    <value>hdfs://ubuntu144:9000/hbase</value>
+    <value>hdfs://master1.cloud.cn:9000/hbase</value>
   </property>
   <property>
     <name>hbase.master.info.bindAddress</name>
-    <value>ubuntu144</value>
+    <value>0.0.0.0</value>
   </property>
   <property>
     <name>hbase.zookeeper.property.dataDir</name>
-    <value>/home/cloudland/zookeeper_data</value>
+    <value>/home/lhfei/app_data/zookeeper</value>
   </property>
   <property>
     <name>hbase.zookeeper.property.clientPort</name>
@@ -44,15 +43,32 @@
   </property>
   <property>
     <name>hbase.zookeeper.quorum</name>
-    <value>ubuntu144, ubuntu145, ubuntu146, ubuntu147</value>
+    <value>master1.cloud.cn</value>
+  </property>
+  <property>
+    <name>zookeeper.znode.parent</name>
+    <value>/hbase-unsecure</value>
+  </property>
+
+  <property>
+    <name>hbase.master.info.port</name>
+    <value>16010</value>
+  </property>
+
+  <property>
+    <name>hbase.master.port</name>
+    <value>16000</value>
   </property>
   <property>
     <name>dfs.replication</name>
-    <value>3</value>
+    <value>1</value>
   </property>
+  <!--<property>
+    <name>hbase.master</name>
+    <value>master1.cloud.cn:16010</value>
+  </property>-->
   <property>
-    <name>hbase.master</name> 
-    <value>ubuntu144:60000</value>
+    <name>hbase.cluster.distributed</name>
+    <value>true</value>
   </property>
 </configuration>
-
