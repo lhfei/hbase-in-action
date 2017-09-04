@@ -37,12 +37,12 @@ public class AppConstant {
 	public static final String TEST_TABLE_COLUMN_FAMILY_NAME = "colfam1";
 	
 	
-	public static final String TEST_TABLE_COLUMN_QUALIFIER_NAME = "col-80";
+	public static final String TEST_TABLE_COLUMN_QUALIFIER_NAME = "col-100";
 	
 	/**
 	 * The test table's row name.
 	 */
-	public static final String TEST_TABLE_ROW_NAME = "row-1";
+	public static final String TEST_TABLE_ROW_NAME = "row-12";
 	
 	
 }

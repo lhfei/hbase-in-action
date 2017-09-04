@@ -7,7 +7,7 @@ target/
 *.tar.gz
 
 # eclipse ignore
-.settings/
+.settings
 .project
 .classpath
 dependency-reduced-pom.xml

@@ -33,8 +33,8 @@ public abstract class AppConfig {
 	public static Configuration getConfiguration() {
 		Configuration conf = HBaseConfiguration.create();
 		
-		conf.set("hbase.master", "192.168.118.128：6000");
-		conf.set("hbase.zookeeper.quorum", "192.168.118.128");
+		conf.set("hbase.master", "master1.cloud.cn：16000");
+		conf.set("hbase.zookeeper.quorum", "master1.cloud.cn");
 		//conf.set("zookeeper.znode.parent", "/cloudland");	// Path must start with / character
 		conf.set("zookeeper.znode.parent", "/hbase-unsecure");
 		return conf;

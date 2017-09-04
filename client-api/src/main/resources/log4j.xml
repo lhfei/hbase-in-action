@@ -104,7 +104,7 @@
 	
 	<!-- Root Logger -->
 	<root>
-		<priority value="debug" />
+		<priority value="INFO" />
 		<appender-ref ref="file"/>
 		<appender-ref ref="debugfile"/>
 		<appender-ref ref="STDOUT"/>
