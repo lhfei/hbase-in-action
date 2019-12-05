@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>cn.lhfei.hbase</groupId>
@@ -14,6 +15,8 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<external.protobuf.version>2.5.0</external.protobuf.version>
+    	<protobuf.plugin.version>0.5.0</protobuf.plugin.version>
 	</properties>
 
 	<reporting>
@@ -43,17 +46,7 @@
 		<dependency>
 			<groupId>org.apache.thrift</groupId>
 			<artifactId>libthrift</artifactId>
-			<version>0.9.3</version>
-		</dependency>
-		<dependency>
-			<groupId>commons-httpclient</groupId>
-			<artifactId>commons-httpclient</artifactId>
-			<version>3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.protobuf</groupId>
-			<artifactId>protobuf-java</artifactId>
-			<version>2.6.1</version>
+			<version>0.13.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
@@ -88,6 +81,11 @@
 			<version>${hbase.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.10.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.pig</groupId>
 			<artifactId>pig</artifactId>
 			<version>0.15.0</version>
@@ -100,6 +98,77 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<mainClass>com.your-package.MainClass</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.xolstice.maven.plugins</groupId>
+				<artifactId>protobuf-maven-plugin</artifactId>
+				<configuration>
+					<protocArtifact>com.google.protobuf:protoc:${external.protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+					<protoSourceRoot>${basedir}/src/main/protobuf/</protoSourceRoot>
+					<clearOutputDirectory>false</clearOutputDirectory>
+					<checkStaleness>true</checkStaleness>
+				</configuration>
+				<executions>
+					<execution>
+						<id>compile-protoc</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<basedir>${basedir}/target/generated-sources/</basedir>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<replacements>
+						<replacement>
+							<token>(public)(\W+static)?(\W+final)?(\W+class)</token>
+							<value>@javax.annotation.Generated("proto") $1$2$3$4</value>
+						</replacement>
+						<replacement>
+							<token>(@javax.annotation.Generated\("proto"\) ){2}</token>
+							<value>$1</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin> -->
+		</plugins>
 		<pluginManagement>
 			<plugins>
 				<plugin>
